@@ -33,7 +33,7 @@ def top_names_plot(df, year=2000, n=10, width=800, height=600, variable='count',
         top_female = female_names.sort_values(variable, ascending=False).head(n)
         top_female['sex_rank'] = range(1, n + 1)  # Rank within female names
 
-        df = pd.concat(top_female)
+        df = pd.DataFrame(top_female)
         df.sort_values(variable, ascending=False, inplace=True)      
 
     fig = px.bar(df, x='name', y=variable, color='sex',
