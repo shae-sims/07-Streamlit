@@ -74,7 +74,7 @@ def name_frequencies_plot(df, year=200, width=800, height=600):
 
 def name_trend_plot(df, name='John', width=800, height=600):
     name_data = df[df['name'] == name].copy()
-    color_map = {"M": "blue", "F": "pink"}
+    color_map = {"M": "#1f77b4", "F": "#ff69b4"}
 
     if name_data.empty:
         print("Name not found in the dataset.")
