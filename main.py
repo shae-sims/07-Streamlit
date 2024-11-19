@@ -47,7 +47,8 @@ with st.sidebar:
 tab1, tab2 = st.tabs(['Names', 'Years'])
 
 with tab1:
-
+    if input_name == "":
+        input_name = "Jared"
     name_data = data[data['name'] == input_name]
     fig = px.line(name_data, x = 'year', y = 'count', color = 'sex')
     st.plotly_chart(fig)
