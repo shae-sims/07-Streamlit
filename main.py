@@ -72,26 +72,41 @@ with tab2:
 
     with col1:
         st.header(f"One Hit Wonders in {year_input}")
-        ohw_year = data[data['year']==year_input]
 
-        if ohw_year.empty:
-            st.write(f"No one-hit wonders found in {year_input}")
+        if year_input not in data['year'].unique():
+            st.write(f"No data available for the year {year_input}")
         else:
-            one_hit_wonder_counts = ohw_year['sex'].value_counts()
-            common_one_hit_wonders = ohw_year.groupby(['name', 'sex'])['count'].sum().reset_index()
+            ohw_year = data[data['year'] == year_input]
 
-            try: 
-                most_common_female = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'F'].sort_values(by='count', ascending=False).iloc[0]
-                most_common_male = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'M'].sort_values(by='count', ascending=False).iloc[0]
+            if ohw_year.empty:
+                st.write(f"No one-hit wonders found in {year_input}")
+            else:
+                one_hit_wonder_counts = ohw_year['sex'].value_counts()
+                common_one_hit_wonders = ohw_year.groupby(['name', 'sex'])['count'].sum().reset_index()
 
-                st.write(f"Summary of One-Hit Wonders in {year}:")
+                try:
+                    most_common_female = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'F'].sort_values(by='count', ascending=False).iloc[0]
+                except IndexError:
+                    most_common_female = None
+
+                try:
+                    most_common_male = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'M'].sort_values(by='count', ascending=False).iloc[0]
+                except IndexError:
+                    most_common_male = None
+
+                st.write(f"Summary of One-Hit Wonders in {year_input}:")
                 st.write(f"Number of female one-hit wonders: {one_hit_wonder_counts.get('F', 0)}")
                 st.write(f"Number of male one-hit wonders: {one_hit_wonder_counts.get('M', 0)}")
 
-                st.write(f"Most common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences")
-                st.write(f"Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences")
-            except:
-                st.write(f"Not enough data to calculate one-hit wonders by sex in {year}")
+                if most_common_female is not None:
+                    st.write(f"Most common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences")
+                else:
+                    st.write("No female one-hit wonders found.")
+
+                if most_common_male is not None:
+                    st.write(f"Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences")
+                else:
+                    st.write("No male one-hit wonders found.")
 
     with col2:
         st.header('Unique Names Table')
