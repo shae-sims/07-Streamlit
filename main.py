@@ -43,6 +43,10 @@ with st.sidebar:
         input_name = st.text_input('Enter a name: ')
         year_input = st.slider("Year", min_value = 1880, max_value= 2023, value = 2000)
         n_names = st.radio('Number of Names per sex',[3,5,10])
+        option = st.selectbox(
+    "What Gender?",
+    ("Male", "Female", "Both"),
+)
 
 tab1, tab2 = st.tabs(['Names', 'Years'])
 
