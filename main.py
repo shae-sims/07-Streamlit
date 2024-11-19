@@ -68,9 +68,16 @@ with tab2:
     fig2 = top_names_plot(data, year = year_input, n = n_names, type = option)
     st.plotly_chart(fig2)
 
-    st.write('Unique Names Table')
-    output_table = unique_names_summary(data, year_input)
-    st.dataframe(output_table)
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.header("Other thing")
+        
+
+    with col2:
+        st.header('Unique Names Table')
+        output_table = unique_names_summary(data, year_input)
+        st.dataframe(output_table)
 
     fig3 = name_frequencies_plot(data, year = year_input)
     st.plotly_chart(fig3)
