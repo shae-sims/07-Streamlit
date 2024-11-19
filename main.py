@@ -50,7 +50,9 @@ with tab1:
     if input_name == "":
         input_name = "Jared"
     name_data = data[data['name'] == input_name]
-    fig = px.line(name_data, x = 'year', y = 'count', color = 'sex')
+    fig = px.line(name_data, x = 'year', y = 'count', color = 'sex',
+                  title=f"Frequency of the name {input_name}")
+    
     st.plotly_chart(fig)
 
     fig4 = name_sex_balance_plot(data, name = input_name)
