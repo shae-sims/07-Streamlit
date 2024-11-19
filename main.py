@@ -72,7 +72,6 @@ with tab2:
     output_table = unique_names_summary(data, year_input)
     st.dataframe(output_table)
 
-    st.write('Times a Name shows up')
     fig3 = name_frequencies_plot(data, year = year_input)
     st.plotly_chart(fig3)
 
