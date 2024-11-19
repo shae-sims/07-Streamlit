@@ -59,7 +59,7 @@ with tab1:
     
     st.plotly_chart(fig)
 
-    fig4 = name_sex_balance_plot(data, name = input_name)
+    fig4 = name_trend_plot(data, name = input_name)
     st.plotly_chart(fig4)
     
 
@@ -71,7 +71,8 @@ with tab2:
     col1, col2 = st.columns(2)
 
     with col1:
-        st.header("Other thing")
+        st.header(f"One Hit Wonders in {year_input}")
+        one_hit_wonders(data, year={year_input})
         
 
     with col2:
