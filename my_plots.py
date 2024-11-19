@@ -74,15 +74,12 @@ def name_frequencies_plot(df, year=200, width=800, height=600):
 
 def name_trend_plot(df, name='John', width=800, height=600):
     name_data = df[df['name'] == name].copy()
-    color_map = {"M": "#1f77b4", "F": "#ff69b4"}
+    color_map = {"M": "#1f77b4", "F": "#ff69b4"}  # Use valid hex color codes
 
     if name_data.empty:
         print("Name not found in the dataset.")
     else:
         # Group by Year and Sex, and calculate total counts
-        #sex_counts = name_data.groupby(['year', 'sex'])['count'].sum().reset_index()
-
-        # Calculate total count per year and male-to-female ratio
         yearly_counts = name_data.groupby(['year', 'sex']).sum()['count'].unstack(fill_value=0)
         yearly_counts['Total'] = yearly_counts['M'] + yearly_counts['F']
         yearly_counts['Male_Ratio'] = yearly_counts['M'] / yearly_counts['Total']
@@ -108,7 +105,7 @@ def name_trend_plot(df, name='John', width=800, height=600):
 
         # Add male and female ratio plot
         fig.add_trace(
-            go.Scatter(x=yearly_counts['year'], y=yearly_counts['Male_Ratio'], mode='lines', showlegend=False,  line=dict(color=color_map['M'])),
+            go.Scatter(x=yearly_counts['year'], y=yearly_counts['Male_Ratio'], mode='lines', showlegend=False, line=dict(color=color_map['M'])),
             row=2, col=1
         )
         fig.add_trace(
