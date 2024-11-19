@@ -72,8 +72,7 @@ with tab2:
 
     with col1:
         st.header(f"One Hit Wonders in {year_input}")
-        one_hit_wonders(data, year={year_input})
-        
+        st.write(one_hit_wonders(data, year={year_input}))
 
     with col2:
         st.header('Unique Names Table')
