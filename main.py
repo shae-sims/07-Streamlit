@@ -74,24 +74,24 @@ with tab2:
         st.header(f"One Hit Wonders in {year_input}")
         ohw_year = data[data['year']==year_input]
 
-    if ohw_year.empty:
-        st.write(f"No one-hit wonders found in {year_input}")
-    else:
-        one_hit_wonder_counts = ohw_year['sex'].value_counts()
-        common_one_hit_wonders = ohw_year.groupby(['name', 'sex'])['count'].sum().reset_index()
+        if ohw_year.empty:
+            st.write(f"No one-hit wonders found in {year_input}")
+        else:
+            one_hit_wonder_counts = ohw_year['sex'].value_counts()
+            common_one_hit_wonders = ohw_year.groupby(['name', 'sex'])['count'].sum().reset_index()
 
-        try: 
-            most_common_female = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'F'].sort_values(by='count', ascending=False).iloc[0]
-            most_common_male = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'M'].sort_values(by='count', ascending=False).iloc[0]
+            try: 
+                most_common_female = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'F'].sort_values(by='count', ascending=False).iloc[0]
+                most_common_male = common_one_hit_wonders[common_one_hit_wonders['sex'] == 'M'].sort_values(by='count', ascending=False).iloc[0]
 
-            st.write(f"Summary of One-Hit Wonders in {year}:")
-            st.write(f"Number of female one-hit wonders: {one_hit_wonder_counts.get('F', 0)}")
-            st.write(f"Number of male one-hit wonders: {one_hit_wonder_counts.get('M', 0)}")
+                st.write(f"Summary of One-Hit Wonders in {year}:")
+                st.write(f"Number of female one-hit wonders: {one_hit_wonder_counts.get('F', 0)}")
+                st.write(f"Number of male one-hit wonders: {one_hit_wonder_counts.get('M', 0)}")
 
-            st.write(f"Most common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences")
-            st.write(f"Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences")
-        except:
-            st.write(f"Not enough data to calculate one-hit wonders by sex in {year}")
+                st.write(f"Most common female one-hit wonder: {most_common_female['name']} with {most_common_female['count']} occurrences")
+                st.write(f"Most common male one-hit wonder: {most_common_male['name']} with {most_common_male['count']} occurrences")
+            except:
+                st.write(f"Not enough data to calculate one-hit wonders by sex in {year}")
 
     with col2:
         st.header('Unique Names Table')
